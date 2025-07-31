@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Studio Portugal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #e8eaed;
+            --text-dark: #1a202c;
+            --text-light: #ffffff;
+            --text-muted: #4a5568;
+            
+            /* Apple-style rainbow spectrum (desaturated) */
+            --apple-gradient: linear-gradient(45deg, 
+                #ff6b6b 0%,
+                #ffa726 14.28%,
+                #ffeb3b 28.56%,
+                #66bb6a 42.84%,
+                #42a5f5 57.12%,
+                #ab47bc 71.4%,
+                #ef5350 85.68%,
+                #ff6b6b 100%);
+                
+            --subtle-gradient: linear-gradient(135deg, 
+                rgba(255, 107, 107, 0.3) 0%, 
+                rgba(255, 167, 38, 0.3) 25%, 
+                rgba(102, 187, 106, 0.3) 50%, 
+                rgba(66, 165, 245, 0.3) 75%, 
+                rgba(171, 71, 188, 0.3) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--primary-bg);
+            overflow-x: hidden;
+        }
+
+        /* Film Grain Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1000;
+            animation: grain 12s linear infinite;
+        }
+
+        @keyframes grain {
+            0% { transform: translate(0, 0) }
+            25% { transform: translate(-5%, -5%) }
+            50% { transform: translate(-10%, 5%) }
+            75% { transform: translate(5%, -10%) }
+            100% { transform: translate(0, 0) }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 249, 250, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 999;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        nav.scrolled {
+            background: rgba(248, 249, 250, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-container {
+            max-width: 120rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--apple-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-dark);
+            background: rgba(0, 0, 0, 0.03);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .youtube-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .youtube-video iframe {
+            width: 100vw;
+            height: 56.25vw;
+            min-height: 100vh;
+            min-width: 177.77vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(0, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 70rem;
+            padding: 0 2rem;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 10rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                0 8px 16px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: var(--apple-gradient);
+            background-size: 200% 200%;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.2),
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: rainbowShift 8s ease-in-out infinite;
+        }
+
+        @keyframes rainbowShift {
+            0%, 100% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 
+                0 6px 20px rgba(0, 0, 0, 0.25),
+                0 12px 35px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 120rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: linear-gradient(135deg, 
+                rgba(248, 249, 250, 0.8) 0%, 
+                rgba(255, 255, 255, 0.9) 100%);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.08),
+                0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .portfolio-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0'/%3E%3C/svg%3E");
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            animation: portfolioGrain 6s linear infinite paused;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.12),
+                0 16px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .portfolio-item:hover::after {
+            opacity: 0.06;
+            animation-play-state: running;
+        }
+
+        @keyframes portfolioGrain {
+            0% { transform: translate(0, 0) }
+            25% { transform: translate(-2%, -3%) }
+            50% { transform: translate(1%, 2%) }
+            75% { transform: translate(-1%, -1%) }
+            100% { transform: translate(0, 0) }
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 20rem;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.05);
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-location {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .portfolio-item:hover .portfolio-location {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--primary-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .office-image {
+            width: 100%;
+            height: 25rem;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.1),
+                0 16px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, 
+                rgba(248, 249, 250, 0.8) 0%, 
+                rgba(255, 255, 255, 0.9) 100%);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .contact-item strong {
+            color: var(--text-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .portfolio-grid {
+                gap: 1.5rem;
+            }
+
+            .portfolio-item {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">Creative Studio</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <!-- YouTube Video Background -->
+        <div class="youtube-video" id="youtube-bg">
+            <iframe 
+                src="https://www.youtube.com/embed/YShVEXb7-ic?autoplay=1&mute=1&loop=1&playlist=YShVEXb7-ic&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+                frameborder="0" 
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Local Video (will override YouTube when available) -->
+        <video class="hero-video" id="local-video" autoplay muted loop style="display: none;">
+            <source src="media/hero-video.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Creative Studio</h1>
+            <p class="hero-subtitle">Crafting digital experiences that inspire and engage</p>
+            <a href="#portfolio" class="hero-cta">
+                View Our Work
+                <span>→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio">
+        <div class="container">
+            <h2 class="section-title">Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-location">Lisbon, PT</div>
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop" alt="Brand Identity Project" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Tech Startup Branding</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-location">Porto, PT</div>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop" alt="Web Design Project" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">E-commerce Platform</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-location">Coimbra, PT</div>
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=300&fit=crop" alt="Mobile App Design" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Mobile App Design</h3>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-location">Aveiro, PT</div>
+                    <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500&h=300&fit=crop" alt="Digital Campaign" class="portfolio-image">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Digital Campaign</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Story</h3>
+                    <p>Based in the heart of Portugal, we are a creative studio passionate about crafting digital experiences that transcend the ordinary. Our team combines strategic thinking with innovative design to help brands connect with their audiences in meaningful ways.</p>
+                    
+                    <h3 style="margin-top: 2rem;">Our Team</h3>
+                    <p>We're a diverse group of designers, developers, and strategists who believe in the power of collaboration. Each project is an opportunity to push boundaries and create something extraordinary.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop" alt="Our Office" class="office-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Work Together</h3>
+                    <div class="contact-item">
+                        <strong>Email:</strong> hello@creativestudio.pt
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone:</strong> +351 123 456 789
+                    </div>
+                    <div class="contact-item">
+                        <strong>Address:</strong> Rua da Criatividade, 123<br>
+                        1000-001 Lisboa, Portugal
+                    </div>
+                    <div class="contact-item">
+                        <strong>Office Hours:</strong> Mon-Fri 9:00-18:00
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=400&fit=crop" alt="Our Office Space" class="office-image">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Video switching logic
+        const localVideo = document.getElementById('local-video');
+        const youtubeVideo = document.getElementById('youtube-bg');
+        
+        localVideo.addEventListener('loadeddata', function() {
+            youtubeVideo.style.display = 'none';
+            localVideo.style.display = 'block';
+        });
+
+        // Enhanced grain effect on portfolio items
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.setProperty('--grain-intensity', '0.08');
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.setProperty('--grain-intensity', '0');
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href').substring(1);
+                if (href === currentSection) {
+                    link.style.background = 'rgba(0, 0, 0, 0.05)';
+                } else {
+                    link.style.background = 'transparent';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
