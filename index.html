@@ -6,7 +6,7 @@
     <title>Creative Studio Portugal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-bg: #e8eaed;
@@ -14,23 +14,29 @@
             --text-light: #ffffff;
             --text-muted: #4a5568;
             
-            /* Apple-style rainbow spectrum (desaturated) */
-            --apple-gradient: linear-gradient(45deg, 
-                #ff6b6b 0%,
-                #ffa726 14.28%,
-                #ffeb3b 28.56%,
-                #66bb6a 42.84%,
-                #42a5f5 57.12%,
-                #ab47bc 71.4%,
-                #ef5350 85.68%,
-                #ff6b6b 100%);
+            /* Desaturated RGB/CMY Palette */
+            --red: #cc6b6b;
+            --green: #6bcc6b;
+            --blue: #6b9acc;
+            --cyan: #6bcccc;
+            --magenta: #cc6bcc;
+            --yellow: #cccc6b;
+            
+            /* Main gradient combining RGB/CMY */
+            --main-gradient: linear-gradient(45deg, 
+                var(--red) 0%,
+                var(--magenta) 16.66%,
+                var(--blue) 33.33%,
+                var(--cyan) 50%,
+                var(--green) 66.66%,
+                var(--yellow) 83.33%,
+                var(--red) 100%);
                 
             --subtle-gradient: linear-gradient(135deg, 
-                rgba(255, 107, 107, 0.3) 0%, 
-                rgba(255, 167, 38, 0.3) 25%, 
-                rgba(102, 187, 106, 0.3) 50%, 
-                rgba(66, 165, 245, 0.3) 75%, 
-                rgba(171, 71, 188, 0.3) 100%);
+                rgba(204, 107, 107, 0.3) 0%, 
+                rgba(107, 204, 107, 0.3) 33.33%, 
+                rgba(107, 154, 204, 0.3) 66.66%, 
+                rgba(204, 204, 107, 0.3) 100%);
         }
 
         * {
@@ -44,11 +50,12 @@
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Source Code Pro', 'Courier New', monospace;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--primary-bg);
             overflow-x: hidden;
+            font-size: 16px;
         }
 
         /* Film Grain Animation */
@@ -78,18 +85,18 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(248, 249, 250, 0.85);
+            background: rgba(232, 234, 237, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             z-index: 999;
             padding: 1rem 0;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
         }
 
         nav.scrolled {
-            background: rgba(248, 249, 250, 0.95);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            background: rgba(232, 234, 237, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
         }
 
         .nav-container {
@@ -102,12 +109,15 @@
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
             text-decoration: none;
             color: var(--text-dark);
             transition: all 0.3s ease;
             position: relative;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .logo::after {
@@ -117,7 +127,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--apple-gradient);
+            background: var(--main-gradient);
             transition: width 0.3s ease;
         }
 
@@ -135,17 +145,82 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
             position: relative;
             padding: 0.5rem 1rem;
             border-radius: 8px;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
         .nav-links a:hover {
-            color: var(--text-dark);
+            color: var(--red);
             background: rgba(0, 0, 0, 0.03);
             transform: translateY(-1px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--red);
+            transform: scale(1.1);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(232, 234, 237, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 998;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(204, 107, 107, 0.1);
+            border-left-color: var(--red);
+            color: var(--red);
         }
 
         /* Hero Section */
@@ -166,6 +241,22 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
+        }
+
+        .hero-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--blue), var(--cyan));
+            z-index: -3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--text-light);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .youtube-video {
@@ -210,7 +301,7 @@
         }
 
         .hero-title {
-            font-size: clamp(3.5rem, 8vw, 10rem);
+            font-size: clamp(4rem, 8vw, 12rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
             color: var(--text-light);
@@ -222,7 +313,7 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
             font-weight: 400;
             margin-bottom: 3rem;
             opacity: 0.9;
@@ -234,27 +325,20 @@
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
-            padding: 1rem 2rem;
-            background: var(--apple-gradient);
-            background-size: 200% 200%;
+            padding: 1.2rem 2.5rem;
+            background: var(--red);
             color: white;
             text-decoration: none;
             border-radius: 12px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
             box-shadow: 
-                0 4px 15px rgba(0, 0, 0, 0.2),
+                0 4px 15px rgba(204, 107, 107, 0.3),
                 0 8px 25px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            animation: rainbowShift 8s ease-in-out infinite;
-        }
-
-        @keyframes rainbowShift {
-            0%, 100% { background-position: 0% 50% }
-            50% { background-position: 100% 50% }
         }
 
         .hero-cta::before {
@@ -269,9 +353,10 @@
         }
 
         .hero-cta:hover {
+            background: var(--magenta);
             transform: translateY(-2px) scale(1.02);
             box-shadow: 
-                0 6px 20px rgba(0, 0, 0, 0.25),
+                0 6px 20px rgba(204, 107, 204, 0.4),
                 0 12px 35px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
@@ -282,7 +367,7 @@
 
         /* Sections */
         .section {
-            padding: 6rem 0;
+            padding: 8rem 0;
             position: relative;
         }
 
@@ -293,25 +378,28 @@
         }
 
         .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(3rem, 5vw, 5rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             color: var(--text-dark);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.08),
+                0 4px 8px rgba(0, 0, 0, 0.04),
+                0 8px 16px rgba(0, 0, 0, 0.02);
         }
 
         /* Portfolio Section */
         .portfolio {
             background: linear-gradient(135deg, 
-                rgba(248, 249, 250, 0.8) 0%, 
+                rgba(232, 234, 237, 0.8) 0%, 
                 rgba(255, 255, 255, 0.9) 100%);
         }
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+            gap: 2.5rem;
             margin-top: 4rem;
         }
 
@@ -363,7 +451,7 @@
 
         .portfolio-image {
             width: 100%;
-            height: 20rem;
+            height: 22rem;
             object-fit: cover;
             transition: all 0.4s ease;
         }
@@ -374,31 +462,35 @@
         }
 
         .portfolio-info {
-            padding: 1.5rem;
+            padding: 2rem;
             position: relative;
         }
 
         .portfolio-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--text-dark);
             margin-bottom: 0.5rem;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
         .portfolio-location {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
+            top: 1.5rem;
+            left: 1.5rem;
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1.2rem;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 500;
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            border-left: 3px solid var(--green);
         }
 
         .portfolio-item:hover .portfolio-location {
@@ -414,27 +506,33 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
-            margin-top: 3rem;
+            margin-top: 4rem;
         }
 
         .about-text {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             line-height: 1.8;
             color: var(--text-muted);
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.06),
+                0 2px 3px rgba(0, 0, 0, 0.03);
         }
 
         .about-text h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
         .office-image {
             width: 100%;
-            height: 25rem;
+            height: 28rem;
             object-fit: cover;
             border-radius: 16px;
             box-shadow: 
@@ -445,32 +543,41 @@
         /* Contact Section */
         .contact {
             background: linear-gradient(135deg, 
-                rgba(248, 249, 250, 0.8) 0%, 
+                rgba(232, 234, 237, 0.8) 0%, 
                 rgba(255, 255, 255, 0.9) 100%);
         }
 
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 3rem;
+            gap: 5rem;
+            margin-top: 4rem;
         }
 
         .contact-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
         .contact-item {
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.06),
+                0 2px 3px rgba(0, 0, 0, 0.03);
         }
 
         .contact-item strong {
             color: var(--text-dark);
+            text-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.08),
+                0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
         /* Responsive Design */
@@ -479,22 +586,35 @@
                 display: none;
             }
 
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .portfolio-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 3rem;
             }
 
             .section {
-                padding: 4rem 0;
+                padding: 5rem 0;
             }
 
             .container {
                 padding: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2.5rem, 8vw, 6rem);
+            }
+
+            .section-title {
+                font-size: clamp(2rem, 6vw, 3rem);
             }
         }
 
@@ -510,6 +630,11 @@
             .portfolio-item {
                 min-height: auto;
             }
+
+            .about-content,
+            .contact-content {
+                gap: 2rem;
+            }
         }
     </style>
 </head>
@@ -517,18 +642,34 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#hero" class="logo">Creative Studio</a>
+            <a href="#hero" class="logo">Creative.Studio</a>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
     <!-- Hero Section -->
     <section id="hero" class="hero">
+        <!-- Fallback Background -->
+        <div class="hero-fallback">
+            Creative Studio Portugal
+        </div>
+        
         <!-- YouTube Video Background -->
         <div class="youtube-video" id="youtube-bg">
             <iframe 
@@ -646,14 +787,60 @@
             }
         });
 
-        // Video switching logic
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            this.textContent = mobileNav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !mobileNav.contains(e.target)) {
+                mobileNav.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+            }
+        });
+
+        // Video handling with better fallbacks
         const localVideo = document.getElementById('local-video');
         const youtubeVideo = document.getElementById('youtube-bg');
-        
-        localVideo.addEventListener('loadeddata', function() {
-            youtubeVideo.style.display = 'none';
-            localVideo.style.display = 'block';
-        });
+        const heroFallback = document.querySelector('.hero-fallback');
+
+        // Try to load local video first
+        if (localVideo) {
+            localVideo.addEventListener('loadeddata', function() {
+                youtubeVideo.style.display = 'none';
+                heroFallback.style.display = 'none';
+                localVideo.style.display = 'block';
+                console.log('Local video loaded successfully');
+            });
+
+            localVideo.addEventListener('error', function() {
+                console.log('Local video failed to load, using YouTube');
+                localVideo.style.display = 'none';
+            });
+        }
+
+        // YouTube iframe error handling
+        const iframe = youtubeVideo.querySelector('iframe');
+        if (iframe) {
+            iframe.addEventListener('error', function() {
+                console.log('YouTube video failed to load, showing fallback');
+                youtubeVideo.style.display = 'none';
+                heroFallback.style.display = 'flex';
+            });
+        }
 
         // Enhanced grain effect on portfolio items
         document.querySelectorAll('.portfolio-item').forEach(item => {
@@ -684,7 +871,7 @@
         // Update active nav link on scroll
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-links a');
+            const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
             
             let currentSection = '';
             sections.forEach(section => {
@@ -698,10 +885,34 @@
             navLinks.forEach(link => {
                 const href = link.getAttribute('href').substring(1);
                 if (href === currentSection) {
-                    link.style.background = 'rgba(0, 0, 0, 0.05)';
+                    if (link.closest('.nav-links')) {
+                        link.style.background = 'rgba(204, 107, 107, 0.1)';
+                        link.style.color = 'var(--red)';
+                    } else {
+                        link.style.borderLeftColor = 'var(--red)';
+                        link.style.color = 'var(--red)';
+                    }
                 } else {
-                    link.style.background = 'transparent';
+                    if (link.closest('.nav-links')) {
+                        link.style.background = 'transparent';
+                        link.style.color = 'var(--text-dark)';
+                    } else {
+                        link.style.borderLeftColor = 'transparent';
+                        link.style.color = 'var(--text-dark)';
+                    }
                 }
+            });
+        });
+
+        // Add loading animation for images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            
+            img.addEventListener('error', function() {
+                this.style.opacity = '0.5';
+                console.log('Image failed to load:', this.src);
             });
         });
     </script>
