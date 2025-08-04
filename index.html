@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Studio Portugal</title>
+    <title>Si_Match Studio - Design & Vídeo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -165,17 +165,17 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             position: relative;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 8px;
             text-shadow: 
                 0 1px 2px rgba(0, 0, 0, 0.08),
@@ -810,6 +810,7 @@
         .contact {
             background: var(--section-bg-alt);
             padding-bottom: 10rem; /* Extra padding for floating footer */
+            margin-bottom: 2rem; /* Extra margin for spacing */
         }
 
         .contact-content {
@@ -848,7 +849,103 @@
                 0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
-        /* Footer */
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-category {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.08),
+                0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .service-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.12),
+                0 16px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-category h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+        }
+
+        .service-list {
+            list-style: none;
+        }
+
+        .service-list li {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .service-tagline {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--red);
+        }
+
+        @media (max-width: 992px) {
+            .nav-links,
+            .theme-toggle {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-category {
+                padding: 2rem;
+            }
+
+            .service-category h3 {
+                font-size: 1.6rem;
+            }
+
+            .service-icon {
+                font-size: 2rem;
+            }
+        }
         .footer {
             background: var(--glass-bg);
             backdrop-filter: blur(20px) saturate(180%);
@@ -1065,23 +1162,29 @@
         }
 
         /* Responsive Design */
+        @media (min-width: 1400px) {
+            .nav-links {
+                gap: 2rem;
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
         @media (max-width: 1199px) {
             /* 3 columns on medium-large screens */
             .portfolio-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-links,
-            .theme-toggle {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
             .showcase-content {
                 grid-template-columns: 1fr;
                 text-align: left;
@@ -1235,13 +1338,14 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#hero" class="logo">Creative.Studio</a>
+            <a href="#hero" class="logo">Si_Match</a>
             <div class="nav-right">
                 <ul class="nav-links">
-                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#hero">Início</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#team">Equipa</a></li>
+                    <li><a href="#contact">Contacto</a></li>
                 </ul>
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                     <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1259,10 +1363,11 @@
     <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobile-nav">
         <ul>
-            <li><a href="#hero">Home</a></li>
+            <li><a href="#hero">Início</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#team">Equipa</a></li>
+            <li><a href="#contact">Contacto</a></li>
         </ul>
     </div>
 
@@ -1270,7 +1375,7 @@
     <section id="hero" class="hero">
         <!-- Fallback Background -->
         <div class="hero-fallback">
-            Creative Studio Portugal
+            Si_Match Studio
         </div>
         
         <!-- YouTube Video Background -->
@@ -1290,12 +1395,59 @@
 
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Creative Studio</h1>
-            <p class="hero-subtitle">Crafting digital experiences that inspire and engage</p>
+            <h1 class="hero-title">Si_Match</h1>
+            <p class="hero-subtitle">De Lisboa, para o mundo. ♡</p>
             <a href="#showcase" class="hero-cta">
-                View Our Work
+                Ver o Nosso Trabalho
                 <span>→</span>
             </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section about">
+        <div class="container">
+            <h2 class="section-title">Os Nossos Serviços</h2>
+            <div class="services-grid">
+                <div class="service-category">
+                    <h3><span class="service-icon">🎨</span> Design</h3>
+                    <ul class="service-list">
+                        <li>Identidade Visual</li>
+                        <li>Campanhas de Comunicação</li>
+                        <li>Design de Livros e Editorial</li>
+                        <li>Design Expositivo</li>
+                        <li>Sinalética</li>
+                        <li>Packaging Design</li>
+                        <li>Design de Rótulos</li>
+                        <li>Ilustração</li>
+                    </ul>
+                    <p class="service-tagline">Design? Si_Match!</p>
+                </div>
+                
+                <div class="service-category">
+                    <h3><span class="service-icon">🎬</span> Vídeo</h3>
+                    <ul class="service-list">
+                        <li>Produção de Vídeo</li>
+                        <li>Edição e Pós-Produção</li>
+                        <li>Produção de Conteúdos</li>
+                        <li>Fotografia e Cinematografia</li>
+                        <li>Animações e Efeitos Especiais</li>
+                    </ul>
+                    <p class="service-tagline">Vídeo? Si_Match!</p>
+                </div>
+                
+                <div class="service-category">
+                    <h3><span class="service-icon">📊</span> Marketing</h3>
+                    <ul class="service-list">
+                        <li>Estratégia de Marketing</li>
+                        <li>Gestão de Redes Sociais</li>
+                        <li>Gestão de Marca</li>
+                        <li>Marketing Digital</li>
+                        <li>Análise de Dados e BI</li>
+                    </ul>
+                    <p class="service-tagline">Marketing? Si_Match!</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1304,36 +1456,36 @@
         <div class="showcase-container">
             <div class="showcase-content">
                 <div class="showcase-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop" alt="Creative workspace" class="showcase-image">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop" alt="Si_Match Studio" class="showcase-image">
                 </div>
                 <div class="showcase-text">
                     <h2 class="showcase-title">
-                        Where <span class="showcase-gradient-text">Innovation</span><br>
-                        Meets Design
+                        <span class="showcase-gradient-text">Si_Match</span><br>
+                        que o Match é certo!
                     </h2>
                     <p class="showcase-description">
-                        We transform ideas into extraordinary digital experiences through cutting-edge technology and timeless design principles.
+                        Somos um estúdio criativo, dinâmico e atrevido, especializado em design e vídeo, com competências estratégicas em marketing. Adoramos transformar ideias em realidade – de 0 a 360º, do conceito inicial ao resultado final.
                     </p>
                     <div class="showcase-features">
                         <div class="showcase-feature">
-                            <div class="showcase-feature-icon">✨</div>
-                            <div>
-                                <h4>Pixel Perfect Design</h4>
-                                <p>Every detail matters in creating unforgettable experiences</p>
-                            </div>
-                        </div>
-                        <div class="showcase-feature">
-                            <div class="showcase-feature-icon">🚀</div>
-                            <div>
-                                <h4>Performance Focused</h4>
-                                <p>Lightning-fast solutions that delight users</p>
-                            </div>
-                        </div>
-                        <div class="showcase-feature">
                             <div class="showcase-feature-icon">🎨</div>
                             <div>
-                                <h4>Creative Excellence</h4>
-                                <p>Pushing boundaries with innovative approaches</p>
+                                <h4>Design? Si_Match!</h4>
+                                <p>Identidade Visual, Editorial, Packaging e mais</p>
+                            </div>
+                        </div>
+                        <div class="showcase-feature">
+                            <div class="showcase-feature-icon">🎬</div>
+                            <div>
+                                <h4>Vídeo? Si_Match!</h4>
+                                <p>Produção, Edição e Animações</p>
+                            </div>
+                        </div>
+                        <div class="showcase-feature">
+                            <div class="showcase-feature-icon">📊</div>
+                            <div>
+                                <h4>Marketing? Si_Match!</h4>
+                                <p>Estratégia, Redes Sociais e Análise</p>
                             </div>
                         </div>
                     </div>
@@ -1406,26 +1558,40 @@
             </div>
             <div class="show-more-wrapper">
                 <button class="show-more-btn" id="show-more-btn">
-                    View More Projects
+                    Ver Mais Projetos
                     <span class="arrow">↓</span>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section about">
+    <!-- Team Section -->
+    <section id="team" class="section portfolio">
         <div class="container">
-            <h2 class="section-title">About Us</h2>
+            <h2 class="section-title">A Nossa Equipa</h2>
             <div class="about-content">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop" alt="Our Office" class="office-image">
                 <div class="about-text">
-                    <h3>Our Story</h3>
-                    <p>Based in the heart of Portugal, we are a creative studio passionate about crafting digital experiences that transcend the ordinary. Our team combines strategic thinking with innovative design to help brands connect with their audiences in meaningful ways.</p>
+                    <h3>Team</h3>
+                    <div style="margin-bottom: 2rem;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem;">Nityam</p>
+                        <p style="color: var(--text-muted);">Founder . Vídeo Diretor</p>
+                    </div>
                     
-                    <h3 style="margin-top: 2rem;">Our Team</h3>
-                    <p>We're a diverse group of designers, developers, and strategists who believe in the power of collaboration. Each project is an opportunity to push boundaries and create something extraordinary.</p>
+                    <div style="margin-bottom: 2rem;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem;">Ana Nascimento</p>
+                        <p style="color: var(--text-muted);">Founder . Creative Diretor</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <p style="font-size: 1.3rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.3rem;">Filipa</p>
+                        <p style="color: var(--text-muted);">Brand Manager</p>
+                    </div>
+                    
+                    <p style="margin-top: 3rem; font-size: 1.2rem; line-height: 1.8; color: var(--text-muted);">
+                        Aqui, acreditamos no poder do match: cada projeto é um encontro, e o nosso papel é alinhar criatividade, ousadia e resultados.
+                    </p>
                 </div>
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Si_Match Team" class="office-image">
             </div>
         </div>
     </section>
@@ -1433,24 +1599,24 @@
     <!-- Contact Section -->
     <section id="contact" class="section contact">
         <div class="container">
-            <h2 class="section-title">Contact</h2>
+            <h2 class="section-title">Contacto</h2>
             <div class="contact-content">
-                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=400&fit=crop" alt="Our Office Space" class="office-image">
+                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&h=400&fit=crop" alt="Si_Match Office" class="office-image">
                 <div class="contact-info">
-                    <h3>Let's Work Together</h3>
+                    <h3>Si Match connosco e verás!</h3>
                     <div class="contact-item">
-                        <strong>Email:</strong> hello@creativestudio.pt
+                        <strong>Novos Projetos:</strong> <a href="mailto:hello@simatch.studio">hello@simatch.studio</a>
                     </div>
                     <div class="contact-item">
-                        <strong>Phone:</strong> +351 123 456 789
+                        <strong>Onde estamos:</strong> Marquês de Pombal, Lisboa<br>
+                        Portugal
                     </div>
                     <div class="contact-item">
-                        <strong>Address:</strong> Rua da Criatividade, 123<br>
-                        1000-001 Lisboa, Portugal
+                        <strong>Horário:</strong> Segunda–Sexta 10h–18h
                     </div>
-                    <div class="contact-item">
-                        <strong>Office Hours:</strong> Mon-Fri 9:00-18:00
-                    </div>
+                    <p style="margin-top: 3rem; font-size: 1.3rem; font-weight: 600; color: var(--red); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);">
+                        Si Match connosco e verás! <a href="https://simatch.studio/" target="_blank" style="color: var(--red); text-decoration: underline; text-underline-offset: 3px;">Aqui!</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -1473,8 +1639,8 @@
                     </a>
                 </div>
                 <div class="footer-text">
-                    <p>© 2025 Creative Studio Portugal. All rights reserved.</p>
-                    <p>Crafted with passion in <a href="#hero">Lisbon</a></p>
+                    <p>© 2025 Si_Match Studio. Todos os direitos reservados.</p>
+                    <p>Criado com paixão em <a href="#hero">Lisboa</a></p>
                 </div>
             </div>
         </div>
@@ -1489,7 +1655,7 @@
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
                     </svg>
                 </a>
-                <a href="#contact" class="book-now-btn">Book Now</a>
+                <a href="#contact" class="book-now-btn">Marcar Agora</a>
                 <a href="https://twitter.com" class="social-link" aria-label="Twitter">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
@@ -1747,8 +1913,8 @@
             
             this.classList.toggle('expanded');
             this.innerHTML = isExpanded 
-                ? 'Show Less <span class="arrow">↑</span>' 
-                : 'View More Projects <span class="arrow">↓</span>';
+                ? 'Ver Menos <span class="arrow">↑</span>' 
+                : 'Ver Mais Projetos <span class="arrow">↓</span>';
             
             // Smooth scroll to show new items
             if (isExpanded) {
